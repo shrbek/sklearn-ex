@@ -28,13 +28,14 @@ for chunk in chart_data:
 
 #print(prices)
 
-dates = np.reshape(dates, (len(dates), 1))
-scaler = preprocessing.StandardScaler()
-dates = scaler.fit_transform(dates)
-
 #-------------------
 import matplotlib.pyplot as plt
 import pickle
+
+scaler = pickle.load(open( "scaler.pkl", "rb" ))
+
+dates = np.reshape(dates, (len(dates), 1))
+dates = scaler.transform(dates)
 
 svr_rbf = pickle.load(open( "svr_rbf_reg.pkl", "rb" ))
 y_rbf = svr_rbf.predict(dates)

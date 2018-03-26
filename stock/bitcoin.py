@@ -44,6 +44,12 @@ svr_poly = SVR(kernel='poly', degree=3 ,C=1e4, gamma=2, epsilon=0.001)
 svr_poly.fit(dates, prices)
 y_poly = svr_poly.predict(dates)
 
+# save model
+import pickle
+pickle.dump(svr_rbf, open( "svr_rbf_reg.pkl", "wb" ))
+pickle.dump(svr_poly, open( "svr_poly_reg.pkl", "wb" ))
+pickle.dump(scaler, open( "scaler.pkl", "wb" ))
+
 # plot 
 lw = 2
 plt.scatter(dates, prices, color='darkorange', label='data')
@@ -55,8 +61,5 @@ plt.title('Support Vector Regression')
 plt.legend()
 plt.show()
 
-# save model
-import pickle
-pickle.dump(svr_rbf, open( "svr_rbf_reg.pkl", "wb" ))
-pickle.dump(svr_poly, open( "svr_poly_reg.pkl", "wb" ))
+
 

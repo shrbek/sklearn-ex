@@ -10,18 +10,26 @@ text_clf = Pipeline([('vect', CountVectorizer()),
 					])
 
 import wikipedia
-def get_data(keyword='Facebook', languages=['en', 'cz', 'de']):
+def get_data(keywords=['Facebook'], languages=['en', 'cz', 'de']):
 	data_list = []
 	for lang in languages:
 		 wikipedia.set_lang(lang)
-		 data_list.append(wikipedia.summary(keyword))
+		 lang_sentence =""
+		 for keyword in keywords:
+		 	lang_sentence += wikipedia.summary(keyword)
+
+		 data_list.append(lang_sentence)
+
 	return (data_list, languages)
 
 
 
 
 # set up data 
-(data, target) = get_data()
+(data, target) = get_data(keywords=['google', 'Facebook', 'abba'])
+
+#print(data)
+#exit ()
 
 text_clf.fit(data, target)
 
